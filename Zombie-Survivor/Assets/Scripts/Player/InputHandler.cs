@@ -29,7 +29,7 @@ public class InputHandler : MonoBehaviour, PlayerInput.IPlayerActions
 
     public void OnShoot(UnityEngine.InputSystem.InputAction.CallbackContext context)
     {
-        if (context.performed)
+        if (context.performed || context.started)
         {
             isShooting = true;
         }
