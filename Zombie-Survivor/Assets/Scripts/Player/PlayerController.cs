@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D rigidBody;
     private Vector2 moveVelocity;
     private float bulletTimer = 0f;
+    private Animator animator;
 
     [SerializeField] private float health = 100f;
     [SerializeField] private float damage = 20f;
@@ -26,6 +27,7 @@ public class PlayerController : MonoBehaviour
     {
         inputHandler = GetComponent<InputHandler>();
         rigidBody = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
     }
 
     private void Update()
@@ -43,6 +45,7 @@ public class PlayerController : MonoBehaviour
         //if movement accelerate to target velocity
         if (inputHandler.movement != Vector2.zero)
         {
+            animator.SetBool("isMoving", true);
             //check if needs to turn
             FlipCheck();
 
@@ -53,6 +56,7 @@ public class PlayerController : MonoBehaviour
         // if no input, decelerate to zero
         else if (inputHandler.movement == Vector2.zero)
         {
+            animator.SetBool("isMoving", false);
             moveVelocity = Vector2.Lerp(moveVelocity, Vector2.zero, deceleration * Time.fixedDeltaTime);
             rigidBody.linearVelocity = moveVelocity;
 
@@ -121,6 +125,16 @@ public class PlayerController : MonoBehaviour
 
     private void Die()
     {
+        Transform[] childTransforms = transform.GetComponentsInChildren<Transform>();
+        foreach (Transform childTransform in childTransforms)
+        {
+            if (childTransform != transform)
+            {
+                Destroy(childTransform.gameObject);
+            }
+        }
+
+        animator.SetTrigger("Dead");
         Menu_Manager menuManager = FindAnyObjectByType<Menu_Manager>();
         menuManager.ShowGameOverPanel();
     }

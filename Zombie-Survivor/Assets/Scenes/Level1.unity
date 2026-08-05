@@ -314,7 +314,8 @@ GameObject:
   - component: {fileID: 120080495}
   - component: {fileID: 120080499}
   - component: {fileID: 120080500}
-  m_Layer: 0
+  - component: {fileID: 120080501}
+  m_Layer: 6
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -505,6 +506,28 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 1.1111112}
   m_EdgeRadius: 0
+--- !u!95 &120080501
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 120080493}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 4d5494907fb9649409a1c967f00034de, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &170295845
 GameObject:
   m_ObjectHideFlags: 0
@@ -515,7 +538,7 @@ GameObject:
   m_Component:
   - component: {fileID: 170295846}
   - component: {fileID: 170295847}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Shadow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -743,7 +766,7 @@ GameObject:
   m_Component:
   - component: {fileID: 293996921}
   - component: {fileID: 293996920}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Left Hand Weapon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1158,7 +1181,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Enemy
   health: 100
-  damage: 15
+  damage: 100
   moveSpeed: 2
 --- !u!61 &719489833
 BoxCollider2D:
@@ -1618,7 +1641,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1650703034}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Firing Point
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1650,7 +1673,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1673122913}
   - component: {fileID: 1673122912}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Right Hand Weapon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
