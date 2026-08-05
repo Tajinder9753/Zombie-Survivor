@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -120,7 +121,8 @@ public class PlayerController : MonoBehaviour
 
     private void Die()
     {
-        Debug.Log("Game Over");
+        Menu_Manager menuManager = FindAnyObjectByType<Menu_Manager>();
+        menuManager.ShowGameOverPanel();
     }
 
     #endregion
