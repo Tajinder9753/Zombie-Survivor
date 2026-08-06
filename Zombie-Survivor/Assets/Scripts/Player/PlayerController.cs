@@ -1,6 +1,8 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
@@ -11,8 +13,11 @@ public class PlayerController : MonoBehaviour
     private Vector2 moveVelocity;
     private float bulletTimer = 0f;
     private Animator animator;
+    private bool canTakeDamage = true;
 
+    [SerializeField] private Slider healthBar;
     [SerializeField] private float health = 100f;
+    [SerializeField] private float maxHealth = 100f;
     [SerializeField] private float damage = 20f;
     [SerializeField] private float moveSpeed = 5f;
     [SerializeField] private float acceleration = 2f;
@@ -28,6 +33,8 @@ public class PlayerController : MonoBehaviour
         inputHandler = GetComponent<InputHandler>();
         rigidBody = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+        healthBar.maxValue = maxHealth;
+        healthBar.value = health;
     }
 
     private void Update()
@@ -115,8 +122,9 @@ public class PlayerController : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
+        if (!canTakeDamage) return;
         health -= damage;
-
+        UpdateHealthBar();
         if (health <= 0f)
         {
             Die();
@@ -133,10 +141,19 @@ public class PlayerController : MonoBehaviour
                 Destroy(childTransform.gameObject);
             }
         }
-
+        Enemy[] enemies = FindObjectsByType<Enemy>();
+        foreach (Enemy enemy in enemies)
+        {
+            enemy.RemoveTarget();
+        }
         animator.SetTrigger("Dead");
         Menu_Manager menuManager = FindAnyObjectByType<Menu_Manager>();
         menuManager.ShowGameOverPanel();
+    }
+
+    private void UpdateHealthBar()
+    {
+        healthBar.value = health;
     }
 
     #endregion
@@ -154,5 +171,71 @@ public class PlayerController : MonoBehaviour
             Shoot();
         }
     }
+    #endregion
+
+    #region PickupEffects
+
+    public void GetHealth(float amount, bool isPermanent)
+    {
+        if (isPermanent)
+        {
+            maxHealth += amount;
+            healthBar.maxValue = maxHealth;
+        }
+        health += amount;
+        if (health > maxHealth)
+        {
+            health = maxHealth;
+        }
+        UpdateHealthBar();
+    }
+
+    public void ActivateSpeedBoost(float speedMultiplier, float duration, bool isPermanent)
+    {
+        if (isPermanent)
+        {
+            moveSpeed += speedMultiplier;
+            return;
+        }
+        moveSpeed += speedMultiplier;
+        StartCoroutine(TemporarySpeedBoost(speedMultiplier, duration));
+    }
+
+    private IEnumerator TemporarySpeedBoost(float speedMultiplier, float duration)
+    {
+        yield return new WaitForSeconds(duration);
+        moveSpeed -= speedMultiplier;
+    }
+
+    public void ActivateInvulnerability(float duration)
+    {
+        StartCoroutine(TemporaryInvulnerability(duration));
+    }
+
+    private IEnumerator TemporaryInvulnerability(float duration)
+    {
+        canTakeDamage = false;
+        yield return new WaitForSeconds(duration);
+        canTakeDamage = true;
+    }
+
+    public void ActivateFireRateBoost(float fireRateMultiplier,float duration, bool isPermanent)
+    {
+        if (isPermanent)
+        {
+            fireRate += fireRateMultiplier;
+            return;
+        }
+
+        fireRate += fireRateMultiplier;
+        StartCoroutine(TemporaryFireRateIncrease(fireRateMultiplier, duration));
+    }
+
+    private IEnumerator TemporaryFireRateIncrease(float fireRateMultiplier, float duration)
+    {
+        yield return new WaitForSeconds(duration);
+        fireRate -= fireRateMultiplier;
+    }
+
     #endregion
 }

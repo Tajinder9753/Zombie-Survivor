@@ -5,14 +5,17 @@ public class Enemy : MonoBehaviour
     [SerializeField] private float health = 100f;
     [SerializeField] private float damage = 20f;
     [SerializeField] private float moveSpeed = 2f;
+    [SerializeField] private int scoreAward = 10;
     Rigidbody2D rb;
     private Transform target;
     private bool isFacingRight = true;
+    private Score_Manager scoreManager;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         target = FindAnyObjectByType<PlayerController>().transform;
+        scoreManager = FindAnyObjectByType<Score_Manager>();
     }
 
 
@@ -58,8 +61,14 @@ public class Enemy : MonoBehaviour
         }
     }
 
+    public void RemoveTarget()
+    {
+        target = null;
+    }
+
     private void Die()
     {
+        scoreManager.AddScore(scoreAward);
         Destroy(gameObject);
     }
 
