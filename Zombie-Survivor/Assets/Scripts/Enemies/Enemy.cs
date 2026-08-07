@@ -10,12 +10,15 @@ public class Enemy : MonoBehaviour
     private Transform target;
     private bool isFacingRight = true;
     private Score_Manager scoreManager;
+    private Animator anim;
+    private bool isDead;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         target = FindAnyObjectByType<PlayerController>().transform;
         scoreManager = FindAnyObjectByType<Score_Manager>();
+        anim = GetComponent<Animator>();
     }
 
 
@@ -26,7 +29,7 @@ public class Enemy : MonoBehaviour
 
     private void MoveToTarget()
     {
-        if (target != null)
+        if (target != null && !isDead)
         {
             Vector2 direction = (target.position - transform.position).normalized;
             rb.linearVelocity = direction * moveSpeed;
@@ -54,9 +57,11 @@ public class Enemy : MonoBehaviour
     public void TakeDamage(float damage)
     {
         health -= damage;
-
+        anim.SetTrigger("isHit");
         if (health <= 0f)
         {
+            isDead = true;
+            rb.linearVelocity = Vector2.zero;
             Die();
         }
     }
@@ -69,7 +74,8 @@ public class Enemy : MonoBehaviour
     private void Die()
     {
         scoreManager.AddScore(scoreAward);
-        Destroy(gameObject);
+        anim.SetBool("isDead", true);
+        Destroy(gameObject, 8);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
