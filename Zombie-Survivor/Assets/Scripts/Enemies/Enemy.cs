@@ -75,7 +75,7 @@ public class Enemy : MonoBehaviour
     {
         scoreManager.AddScore(scoreAward);
         anim.SetBool("isDead", true);
-        Destroy(gameObject, 8);
+        Destroy(gameObject, 5);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
