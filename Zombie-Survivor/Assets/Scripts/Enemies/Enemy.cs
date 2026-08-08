@@ -12,6 +12,7 @@ public class Enemy : MonoBehaviour
     private Score_Manager scoreManager;
     private Animator anim;
     private bool isDead;
+    private Enemy_Manager enemyManager;
 
     private void Awake()
     {
@@ -19,6 +20,7 @@ public class Enemy : MonoBehaviour
         target = FindAnyObjectByType<PlayerController>().transform;
         scoreManager = FindAnyObjectByType<Score_Manager>();
         anim = GetComponent<Animator>();
+        enemyManager = FindAnyObjectByType<Enemy_Manager>();
     }
 
 
@@ -74,6 +76,7 @@ public class Enemy : MonoBehaviour
     private void Die()
     {
         scoreManager.AddScore(scoreAward);
+        enemyManager.EnemyDead();
         anim.SetBool("isDead", true);
         Destroy(gameObject, 5);
     }

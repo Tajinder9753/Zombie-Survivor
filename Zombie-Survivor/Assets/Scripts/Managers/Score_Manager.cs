@@ -5,6 +5,7 @@ public class Score_Manager : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI scoreText;
     [SerializeField] private TextMeshProUGUI killCountText;
+    [SerializeField] private Enemy_Manager enemyManager;
     private int score;
     private int numKills = 0;
 
@@ -25,5 +26,11 @@ public class Score_Manager : MonoBehaviour
         score += amount;
         numKills++;
         UpdateScoreText();
+
+        //every 10 kills increase the difficulty slightly through changing something 
+        if (numKills % 10 == 0)
+        {
+
+        }
     }
 }
