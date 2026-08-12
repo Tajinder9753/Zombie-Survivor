@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class Enemy_Manager : MonoBehaviour
@@ -8,17 +9,9 @@ public class Enemy_Manager : MonoBehaviour
     [SerializeField] List<Transform> transforms = new List<Transform>();
     [SerializeField] private int maxEnemies = 10;
     [SerializeField] private float spawnInterval = 5f;
-    private int enemyCount = 0;
+    [SerializeField] private int enemyCount = 0;
 
-    private void Update()
-    {
-        if (enemyCount < maxEnemies)
-        {
-            SpawnEnemy();
-        }
-    }
-
-    private void SpawnEnemy()
+    private void Start()
     {
         StartCoroutine(StartSpawning());
     }
@@ -26,27 +19,66 @@ public class Enemy_Manager : MonoBehaviour
     //starts spawning enemies
     private IEnumerator StartSpawning()
     {
-        yield return new WaitForSeconds(spawnInterval);
-        Enemy enemyToSpawn = PickEnemyToSpawn();
-        Transform spawnPoint = PickSpawnPoint();
-        Instantiate(enemyToSpawn, spawnPoint);
-        enemyCount++;
+        while (true)
+        {
+            if (enemyCount < maxEnemies)
+            {
+                yield return new WaitForSeconds(spawnInterval);
+                Enemy enemyToSpawn = PickEnemyToSpawn();
+                Transform spawnPoint = PickSpawnPoint();
+                Instantiate(enemyToSpawn, spawnPoint);
+            }
+            else
+            {
+                yield return null;
+            }
+        }
 
     }
     //selects an enemy from the list to spawn
     private Enemy PickEnemyToSpawn()
     {
-        return enemies[enemyCount - 1];
+        Enemy enemyToSpawn = enemies[0];
+        int totalOdds = 0;
+        foreach (Enemy enemy in enemies)
+        {
+            totalOdds += enemy.chanceToSpawn;
+        }
+        int randomNum = Random.Range(0, totalOdds);
+        int cumulativeSum = 0;
+
+        foreach(Enemy enemy in enemies)
+        {
+            cumulativeSum += enemy.chanceToSpawn;
+            if (randomNum < cumulativeSum)
+            {
+                return enemy;
+            }
+        }
+
+        return enemyToSpawn; //fallback
     }
 
     private Transform PickSpawnPoint()
     {
-        return transforms[enemyCount - 1];
+        int spawnPoint = Random.Range(0, transforms.Count);
+
+        return transforms[spawnPoint];
     }
 
     //reduces enemyCount when enemy dies 
     public void EnemyDead()
     {
         enemyCount--;
+    }
+
+    public void AddEnemy()
+    {
+        enemyCount++;
+    }
+
+    public void IncreaseChances()
+    {
+
     }
 }

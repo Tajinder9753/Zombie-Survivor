@@ -184,6 +184,7 @@ MonoBehaviour:
   damage: 10
   moveSpeed: 2
   scoreAward: 10
+  changeToSpawn: 18
 --- !u!95 &5886156657985014549
 Animator:
   serializedVersion: 7

@@ -6,13 +6,14 @@ public class Enemy : MonoBehaviour
     [SerializeField] private float damage = 20f;
     [SerializeField] private float moveSpeed = 2f;
     [SerializeField] private int scoreAward = 10;
+    public int chanceToSpawn = 30;
     Rigidbody2D rb;
     private Transform target;
     private bool isFacingRight = true;
     private Score_Manager scoreManager;
     private Animator anim;
     private bool isDead;
-    private Enemy_Manager enemyManager;
+    [SerializeField] private Enemy_Manager enemyManager;
 
     private void Awake()
     {
@@ -21,8 +22,8 @@ public class Enemy : MonoBehaviour
         scoreManager = FindAnyObjectByType<Score_Manager>();
         anim = GetComponent<Animator>();
         enemyManager = FindAnyObjectByType<Enemy_Manager>();
+        enemyManager.AddEnemy();
     }
-
 
     private void Update()
     {
