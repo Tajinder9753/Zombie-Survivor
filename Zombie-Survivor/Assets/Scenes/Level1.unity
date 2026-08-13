@@ -406,6 +406,10 @@ MonoBehaviour:
   fireRate: 0.6
   projectile: {fileID: 7220095380548223740, guid: 0320a9e8a063f2647abb40abdb928f8d, type: 3}
   firingPoint: {fileID: 1650703034}
+  absoluteMaxHealth: 200
+  absoluteMaxSpeed: 12
+  absoluteMaxFireRate: 0.15
+  pickupManager: {fileID: 1655257496}
 --- !u!212 &120080497
 SpriteRenderer:
   serializedVersion: 2
@@ -1703,9 +1707,12 @@ MonoBehaviour:
   - {fileID: 1505852384}
   - {fileID: 459535772}
   - {fileID: 967739727}
-  maxEnemies: 2
-  spawnInterval: 2
+  currentMaxEnemiesInLevel: 10
+  spawnInterval: 4
   enemyCount: 0
+  intervalChange: 0.4
+  absoluteMaxEnemeies: 20
+  chanceToSpawnIncrease: 10
 --- !u!1 &947936896
 GameObject:
   m_ObjectHideFlags: 0
@@ -1848,6 +1855,7 @@ Transform:
   - {fileID: 1075426128}
   - {fileID: 833357348}
   - {fileID: 1655257495}
+  - {fileID: 1515993739}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1004050094
@@ -1931,7 +1939,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Score_Manager
   scoreText: {fileID: 1235709077}
   killCountText: {fileID: 167147891}
-  enemyManager: {fileID: 0}
+  enemyManager: {fileID: 833357349}
+  difficultyIncreaseInterval: 10
 --- !u!1 &1127995750
 GameObject:
   m_ObjectHideFlags: 0
@@ -2616,6 +2625,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1004050095}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1515993738
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1515993739}
+  m_Layer: 0
+  m_Name: Sound Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1515993739
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1515993738}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 982303979}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1617349073
 GameObject:
   m_ObjectHideFlags: 0
@@ -2734,6 +2774,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1655257495}
+  - component: {fileID: 1655257496}
   m_Layer: 0
   m_Name: Pickup Manager
   m_TagString: Untagged
@@ -2756,6 +2797,28 @@ Transform:
   m_Children: []
   m_Father: {fileID: 982303979}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1655257496
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1655257494}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dadc24a9455ea16489471347567da87c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Pickup_Manager
+  chanceToDropPickup: 100
+  pickups:
+  - {fileID: 1609031272474201209, guid: a7ce9c4e5aacc494c81a6ddeb367b0a7, type: 3}
+  - {fileID: 6716113948912212389, guid: 3982ca917e7b22c4aaca1f8cce2902f8, type: 3}
+  - {fileID: 7140251088483165321, guid: c349a14a797915845b2f29923fc8e348, type: 3}
+  - {fileID: 8292216572177469811, guid: f7607cb0c8748fe4ca13f51d010f9431, type: 3}
+  - {fileID: 8829249531611216683, guid: 34c72a1d0b0bfba49827d0e6e5f375cb, type: 3}
+  - {fileID: 837393263323033385, guid: c06c1507f78370445b1da91d797d6470, type: 3}
+  - {fileID: 8329545387202943262, guid: 060839893f508a147abee1ef81a7eb03, type: 3}
+  - {fileID: 1937415126956462427, guid: f9f6ef99f42de5a468bae47478fcab19, type: 3}
 --- !u!1 &1673122911
 GameObject:
   m_ObjectHideFlags: 0

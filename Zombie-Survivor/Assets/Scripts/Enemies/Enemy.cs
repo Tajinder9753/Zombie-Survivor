@@ -13,7 +13,8 @@ public class Enemy : MonoBehaviour
     private Score_Manager scoreManager;
     private Animator anim;
     private bool isDead;
-    [SerializeField] private Enemy_Manager enemyManager;
+    private Enemy_Manager enemyManager;
+    private Pickup_Manager pickupManager;
 
     private void Awake()
     {
@@ -23,6 +24,7 @@ public class Enemy : MonoBehaviour
         anim = GetComponent<Animator>();
         enemyManager = FindAnyObjectByType<Enemy_Manager>();
         enemyManager.AddEnemy();
+        pickupManager = FindAnyObjectByType<Pickup_Manager>();
     }
 
     private void Update()
@@ -59,6 +61,7 @@ public class Enemy : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
+        if (isDead) return;
         health -= damage;
         anim.SetTrigger("isHit");
         if (health <= 0f)
@@ -79,6 +82,7 @@ public class Enemy : MonoBehaviour
         scoreManager.AddScore(scoreAward);
         enemyManager.EnemyDead();
         anim.SetBool("isDead", true);
+        pickupManager.CheckDropPickup(this.transform.position);
         Destroy(gameObject, 5);
     }
 

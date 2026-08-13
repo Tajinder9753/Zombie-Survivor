@@ -7,7 +7,6 @@ using UnityEngine.UI;
 public class PlayerController : MonoBehaviour
 {
     private InputHandler inputHandler;
-
     private bool isFacingRight = true;
     private Rigidbody2D rigidBody;
     private Vector2 moveVelocity;
@@ -25,6 +24,12 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float fireRate = 1f;
     [SerializeField] private GameObject projectile;
     [SerializeField] private Transform firingPoint;
+
+    [SerializeField] private float absoluteMaxHealth = 150f;
+    [SerializeField] private float absoluteMaxSpeed = 12f;
+    [SerializeField] private float absoluteMaxFireRate = 0.4f;
+
+    [SerializeField] private Pickup_Manager pickupManager;
 
 
     #region awake,update,start
@@ -181,6 +186,11 @@ public class PlayerController : MonoBehaviour
         {
             maxHealth += amount;
             healthBar.maxValue = maxHealth;
+            if (maxHealth >= absoluteMaxHealth)
+            {
+                pickupManager.RemovePickup(PickupType.PermanentHealthIncrease);
+
+            }
         }
         health += amount;
         if (health > maxHealth)
@@ -195,6 +205,10 @@ public class PlayerController : MonoBehaviour
         if (isPermanent)
         {
             moveSpeed += speedMultiplier;
+            if (moveSpeed >= absoluteMaxSpeed)
+            {
+                pickupManager.RemovePickup(PickupType.PermanentSpeedBoost);
+            }
             return;
         }
         moveSpeed += speedMultiplier;
@@ -224,6 +238,10 @@ public class PlayerController : MonoBehaviour
         if (isPermanent)
         {
             fireRate += fireRateMultiplier;
+            if (fireRate <= absoluteMaxFireRate)
+            {
+                pickupManager.RemovePickup(PickupType.PermanentFiringSpeedBoost);
+            }
             return;
         }
 

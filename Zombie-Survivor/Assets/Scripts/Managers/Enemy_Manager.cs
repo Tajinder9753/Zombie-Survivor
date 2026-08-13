@@ -7,9 +7,14 @@ public class Enemy_Manager : MonoBehaviour
 {
     [SerializeField] List<Enemy> enemies = new List<Enemy>();
     [SerializeField] List<Transform> transforms = new List<Transform>();
-    [SerializeField] private int maxEnemies = 10;
+    [SerializeField] private int currentMaxEnemiesInLevel = 10;
     [SerializeField] private float spawnInterval = 5f;
     [SerializeField] private int enemyCount = 0;
+    [SerializeField] private float intervalChange = 0.4f;
+    [SerializeField] private int absoluteMaxEnemeies = 20;
+    [SerializeField] private int chanceToSpawnIncrease = 10;
+    private bool maxInterval;
+    private bool maxEnemies;
 
     private void Start()
     {
@@ -21,7 +26,7 @@ public class Enemy_Manager : MonoBehaviour
     {
         while (true)
         {
-            if (enemyCount < maxEnemies)
+            if (enemyCount < currentMaxEnemiesInLevel)
             {
                 yield return new WaitForSeconds(spawnInterval);
                 Enemy enemyToSpawn = PickEnemyToSpawn();
@@ -77,8 +82,71 @@ public class Enemy_Manager : MonoBehaviour
         enemyCount++;
     }
 
-    public void IncreaseChances()
+    public void IncreaseDifficulty()
     {
+        if (maxEnemies && maxInterval)
+        {
+            ChangeEnemyChances();
+            return;
+        }
 
+        int randomNum = Random.Range(0, 2);
+        int secondRandomNum = Random.Range(0, 1);
+
+        switch (randomNum)
+        {
+            case 0: 
+                if (!maxInterval)
+                {
+                    ChangeInterval();
+                }
+                else if (secondRandomNum == 0)
+                {
+                    IncreaseNumEnemies();
+                }
+                else
+                {
+                    ChangeEnemyChances();
+                }
+                break;
+            case 1:
+                if (!maxEnemies)
+                {
+                    IncreaseNumEnemies();
+                }
+                else if (secondRandomNum ==1)
+                {
+                    ChangeInterval();
+                }
+                else
+                {
+                    ChangeEnemyChances();
+                }
+                break;
+            case 2:
+                ChangeEnemyChances();
+                break;
+            default:
+                break;
+        }
+    }
+
+    private void ChangeInterval()
+    {
+        spawnInterval -= intervalChange;
+        if (spawnInterval <= 1.0f) maxInterval = true;
+    }
+
+    private void IncreaseNumEnemies()
+    {
+        currentMaxEnemiesInLevel++;
+        if (currentMaxEnemiesInLevel == absoluteMaxEnemeies) maxEnemies = true;
+    }
+
+    private void ChangeEnemyChances()
+    {
+        int enemyToChange = Random.Range(1, enemies.Count);
+        Enemy enemy = enemies[enemyToChange];
+        enemy.chanceToSpawn += chanceToSpawnIncrease;
     }
 }

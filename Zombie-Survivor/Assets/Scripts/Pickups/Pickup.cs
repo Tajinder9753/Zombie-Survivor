@@ -2,10 +2,9 @@ using UnityEngine;
 
 public class Pickup : MonoBehaviour
 {
-    [SerializeField] private PickupType pickupType;
+    public PickupType pickupType;
     [SerializeField] private float value;
     [SerializeField] private float timeToKeepActive;
-
 
     private void OnCollisionEnter2D(Collision2D collision)
     {

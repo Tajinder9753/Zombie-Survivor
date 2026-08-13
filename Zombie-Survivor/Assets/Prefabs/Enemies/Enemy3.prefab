@@ -184,7 +184,8 @@ MonoBehaviour:
   damage: 10
   moveSpeed: 2
   scoreAward: 10
-  changeToSpawn: 14
+  chanceToSpawn: 15
+  enemyManager: {fileID: 0}
 --- !u!95 &5651534185600449671
 Animator:
   serializedVersion: 7
