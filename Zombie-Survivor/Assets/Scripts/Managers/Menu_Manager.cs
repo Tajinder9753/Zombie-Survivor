@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement;
 public class Menu_Manager : MonoBehaviour
 {
     [SerializeField] private GameObject gameOverPanel;
+    [SerializeField] private GameObject instructionsCanvas;
+    [SerializeField] private GameObject mainCanvas;
     [SerializeField] private float timeToWait = 4f;
     public void ShowGameOverPanel()
     {
@@ -26,5 +28,17 @@ public class Menu_Manager : MonoBehaviour
     public void ExitGame()
     {
         Application.Quit();
+    }
+
+    public void OpenInstructionsPanel()
+    {
+        mainCanvas.SetActive(false);
+        instructionsCanvas.SetActive(true);
+    }
+
+    public void CloseInstructionsPanel()
+    {
+        instructionsCanvas.SetActive(false);
+        mainCanvas.SetActive(true);
     }
 }
