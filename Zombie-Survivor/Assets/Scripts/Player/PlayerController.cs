@@ -14,6 +14,7 @@ public class PlayerController : MonoBehaviour
     private Animator animator;
     private bool canTakeDamage = true;
 
+    [Header("Movement and Firing Values")]
     [SerializeField] private Slider healthBar;
     [SerializeField] private float health = 100f;
     [SerializeField] private float maxHealth = 100f;
@@ -25,6 +26,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private GameObject projectile;
     [SerializeField] private Transform firingPoint;
 
+    [Header("Absolute Max Values")]
     [SerializeField] private float absoluteMaxHealth = 150f;
     [SerializeField] private float absoluteMaxSpeed = 12f;
     [SerializeField] private float absoluteMaxFireRate = 0.4f;
@@ -114,6 +116,7 @@ public class PlayerController : MonoBehaviour
         bullet.GetComponent<Bullet>().Fire(GetAimDirection());
     }
 
+    //returns the direction the mouse is in for firing the bullet
     private Vector2 GetAimDirection()
     {
         Vector2 mousePos = Mouse.current.position.ReadValue();
@@ -138,6 +141,7 @@ public class PlayerController : MonoBehaviour
 
     private void Die()
     {
+        //removes the arm components so the death animation works properly
         Transform[] childTransforms = transform.GetComponentsInChildren<Transform>();
         foreach (Transform childTransform in childTransforms)
         {
@@ -146,6 +150,7 @@ public class PlayerController : MonoBehaviour
                 Destroy(childTransform.gameObject);
             }
         }
+        //have the enemies disengage 
         Enemy[] enemies = FindObjectsByType<Enemy>();
         foreach (Enemy enemy in enemies)
         {
@@ -154,6 +159,7 @@ public class PlayerController : MonoBehaviour
         animator.SetTrigger("Dead");
         Menu_Manager menuManager = FindAnyObjectByType<Menu_Manager>();
         menuManager.ShowGameOverPanel();
+        inputHandler.enabled = false;
     }
 
     private void UpdateHealthBar()
@@ -186,6 +192,7 @@ public class PlayerController : MonoBehaviour
         {
             maxHealth += amount;
             healthBar.maxValue = maxHealth;
+            //remove the permanent increase pickup if the max increase reached
             if (maxHealth >= absoluteMaxHealth)
             {
                 pickupManager.RemovePickup(PickupType.PermanentHealthIncrease);
@@ -205,6 +212,7 @@ public class PlayerController : MonoBehaviour
         if (isPermanent)
         {
             moveSpeed += speedMultiplier;
+            //remove the permanent increase pickup if the max increase reached
             if (moveSpeed >= absoluteMaxSpeed)
             {
                 pickupManager.RemovePickup(PickupType.PermanentSpeedBoost);
@@ -238,6 +246,7 @@ public class PlayerController : MonoBehaviour
         if (isPermanent)
         {
             fireRate += fireRateMultiplier;
+            //remove the permanent increase pickup if the max increase reached
             if (fireRate <= absoluteMaxFireRate)
             {
                 pickupManager.RemovePickup(PickupType.PermanentFiringSpeedBoost);

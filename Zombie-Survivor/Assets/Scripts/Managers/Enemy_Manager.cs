@@ -26,6 +26,7 @@ public class Enemy_Manager : MonoBehaviour
     {
         while (true)
         {
+            //spawns enemies until hits the max number allowed
             if (enemyCount < currentMaxEnemiesInLevel)
             {
                 yield return new WaitForSeconds(spawnInterval);
@@ -52,6 +53,7 @@ public class Enemy_Manager : MonoBehaviour
         int randomNum = Random.Range(0, totalOdds);
         int cumulativeSum = 0;
 
+        //uses cumulativeSum (weighted probability) to find the enemy to spawn
         foreach(Enemy enemy in enemies)
         {
             cumulativeSum += enemy.chanceToSpawn;
@@ -64,6 +66,7 @@ public class Enemy_Manager : MonoBehaviour
         return enemyToSpawn; //fallback
     }
 
+    //uses random range to find spawnpoint
     private Transform PickSpawnPoint()
     {
         int spawnPoint = Random.Range(0, transforms.Count);
@@ -77,13 +80,16 @@ public class Enemy_Manager : MonoBehaviour
         enemyCount--;
     }
 
+    //increases enemyCount when enemy spawns
     public void AddEnemy()
     {
         enemyCount++;
     }
 
+    //increases the difficulty of the game when called in one of 3 ways
     public void IncreaseDifficulty()
     {
+        //if already at the maxEnemies in level and the fastest spawn interval allowed then just change the enemySpawnChances for tougher enemies
         if (maxEnemies && maxInterval)
         {
             ChangeEnemyChances();
@@ -95,11 +101,13 @@ public class Enemy_Manager : MonoBehaviour
 
         switch (randomNum)
         {
+            //if 0 should change the interval
             case 0: 
                 if (!maxInterval)
                 {
                     ChangeInterval();
                 }
+                //if already at the max interval use the second random num to determine if should increase the num of enemies or change the enemy chances
                 else if (secondRandomNum == 0)
                 {
                     IncreaseNumEnemies();
@@ -145,6 +153,7 @@ public class Enemy_Manager : MonoBehaviour
 
     private void ChangeEnemyChances()
     {
+        //increase the chance for tougher enemies (excluding the most basic enemy) to spawn
         int enemyToChange = Random.Range(1, enemies.Count);
         Enemy enemy = enemies[enemyToChange];
         enemy.chanceToSpawn += chanceToSpawnIncrease;

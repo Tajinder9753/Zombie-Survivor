@@ -6,6 +6,7 @@ public class Pickup : MonoBehaviour
     [SerializeField] private float value;
     [SerializeField] private float timeToKeepActive;
 
+    //calls the appropriate method for the player controller when the player picks up the item
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.collider.tag == "Player")

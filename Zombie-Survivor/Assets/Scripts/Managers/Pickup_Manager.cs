@@ -7,6 +7,7 @@ public class Pickup_Manager : MonoBehaviour
     [SerializeField] private int chanceToDropPickup = 20;
     [SerializeField] private List<Pickup> pickups;
     
+    //uses a random num to check if should drop a pickup or not
     public void CheckDropPickup(Vector3 locationToDrop)
     {
         int randomNum = Random.Range(0, 100);
@@ -22,6 +23,7 @@ public class Pickup_Manager : MonoBehaviour
         Instantiate(pickups[0], locationToDrop, Quaternion.identity);
     }
 
+    //removes pickup from list, used for permanent pickups once the max permanent increase is hit
     public void RemovePickup(PickupType typeToRemove)
     {
         foreach (Pickup pickup in pickups)

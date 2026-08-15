@@ -32,6 +32,7 @@ public class Enemy : MonoBehaviour
         MoveToTarget();
     }
 
+    //simply moves to the player (target)
     private void MoveToTarget()
     {
         if (target != null && !isDead)
@@ -51,6 +52,7 @@ public class Enemy : MonoBehaviour
         }
     }
 
+    //flips the facing direction
     private void Flip()
     {
         isFacingRight = !isFacingRight;
@@ -86,9 +88,10 @@ public class Enemy : MonoBehaviour
         Destroy(gameObject, 5);
     }
 
+    //damages player if the enemy collides
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag == "Player")
+        if (collision.tag == "Player" && !isDead)
         {
             collision.gameObject.GetComponent<PlayerController>().TakeDamage(damage);
         }

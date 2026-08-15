@@ -3,20 +3,18 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     [SerializeField] private float timeBeforeDie = 2f;
-    Rigidbody2D rb;
     [SerializeField] private float speed = 3f;
     [SerializeField] private float angleOffset = 270f;
+    Rigidbody2D rb;
     public float damage;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
     }
+    //fires the bullet in the given direction
     public void Fire(Vector2 direction)
     {
-        // Add logic to fire the bullet
-        Debug.Log("Firing Bullet");
-
         rb.linearVelocity = direction * speed;
 
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
@@ -27,6 +25,7 @@ public class Bullet : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        //damage the enemy if collides with it
         if (collision.tag == "Enemy")
         {
             collision.gameObject.GetComponent<Enemy>().TakeDamage(damage);
