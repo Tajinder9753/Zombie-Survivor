@@ -131,6 +131,7 @@ public class PlayerController : MonoBehaviour
     public void TakeDamage(float damage)
     {
         if (!canTakeDamage) return;
+        animator.SetTrigger("isHit");
         health -= damage;
         UpdateHealthBar();
         if (health <= 0f)

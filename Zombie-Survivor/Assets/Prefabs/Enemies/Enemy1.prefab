@@ -184,7 +184,7 @@ MonoBehaviour:
   damage: 8
   moveSpeed: 1.8
   scoreAward: 20
-  deathParticleEffect: {fileID: 2433282508537954060, guid: 3ef3ae421f71c5c4e97fe12dc2fc6312, type: 3}
+  deathParticleEffect: {fileID: 5985634496115995773, guid: 463cf9f7af4680240898f6aeba3fe3e6, type: 3}
   chanceToSpawn: 25
   isDead: 0
 --- !u!95 &8063368614416303525
