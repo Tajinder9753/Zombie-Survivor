@@ -15,6 +15,7 @@ public class InputHandler : MonoBehaviour, PlayerInput.IPlayerActions
     private void OnEnable()
     {
         playerInputActions.Player.Enable();
+        isShooting = false;
     }
 
     private void OnDisable()

@@ -32,7 +32,12 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float absoluteMaxFireRate = 0.4f;
 
     [SerializeField] private Pickup_Manager pickupManager;
-
+    [SerializeField] private Sound_Manager soundManager;
+    [SerializeField] private AudioClip movementSound;
+    [SerializeField] private AudioClip firingSound;
+    [SerializeField] private AudioClip deathSoundEffect;
+    private bool isMoving;
+    AudioSource audioSource;
 
     #region awake,update,start
     private void Awake()
@@ -42,12 +47,14 @@ public class PlayerController : MonoBehaviour
         animator = GetComponent<Animator>();
         healthBar.maxValue = maxHealth;
         healthBar.value = health;
+        audioSource = GetComponent<AudioSource>();
     }
 
     private void Update()
     {
         UpdateMovement();
         ResetTimer();
+
     }
 
     #endregion
@@ -56,8 +63,9 @@ public class PlayerController : MonoBehaviour
     #region movement
     private void UpdateMovement()
     {
+        isMoving = inputHandler.movement != Vector2.zero;
         //if movement accelerate to target velocity
-        if (inputHandler.movement != Vector2.zero)
+        if (isMoving)
         {
             animator.SetBool("isMoving", true);
             //check if needs to turn
@@ -66,14 +74,25 @@ public class PlayerController : MonoBehaviour
             Vector2 targetVelocity = inputHandler.movement * moveSpeed;
             moveVelocity = Vector2.Lerp(moveVelocity, targetVelocity, acceleration * Time.fixedDeltaTime);
             rigidBody.linearVelocity = moveVelocity;
+
+            if (!audioSource.isPlaying)
+            {
+                audioSource.clip = movementSound;
+                audioSource.loop = true;
+                audioSource.Play();
+            }
         }
         // if no input, decelerate to zero
-        else if (inputHandler.movement == Vector2.zero)
+        else
         {
             animator.SetBool("isMoving", false);
             moveVelocity = Vector2.Lerp(moveVelocity, Vector2.zero, deceleration * Time.fixedDeltaTime);
             rigidBody.linearVelocity = moveVelocity;
 
+            if (audioSource.isPlaying)
+            {
+                audioSource.Stop();
+            }
         }
     }
     //check if need to flip
@@ -114,6 +133,7 @@ public class PlayerController : MonoBehaviour
         GameObject bullet = Instantiate(projectile, firingPoint.position, firingPoint.rotation);
         bullet.GetComponent<Bullet>().damage = damage;
         bullet.GetComponent<Bullet>().Fire(GetAimDirection());
+        soundManager.PlaySoundEffect(firingSound, this.transform, 1f);
     }
 
     //returns the direction the mouse is in for firing the bullet
@@ -136,7 +156,9 @@ public class PlayerController : MonoBehaviour
         UpdateHealthBar();
         if (health <= 0f)
         {
+            soundManager.PlaySoundEffect(deathSoundEffect, this.transform, 1f);
             Die();
+            canTakeDamage = false;
         }
     }
 
