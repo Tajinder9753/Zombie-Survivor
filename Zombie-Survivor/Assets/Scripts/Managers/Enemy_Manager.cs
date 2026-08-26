@@ -89,6 +89,7 @@ public class Enemy_Manager : MonoBehaviour
     //increases the difficulty of the game when called in one of 3 ways
     public void IncreaseDifficulty()
     {
+        Debug.Log("Increasing Difficulty");
         //if already at the maxEnemies in level and the fastest spawn interval allowed then just change the enemySpawnChances for tougher enemies
         if (maxEnemies && maxInterval)
         {
@@ -141,12 +142,14 @@ public class Enemy_Manager : MonoBehaviour
 
     private void ChangeInterval()
     {
+        Debug.Log("Changing Spawn Interval");
         spawnInterval -= intervalChange;
         if (spawnInterval <= 1.0f) maxInterval = true;
     }
 
     private void IncreaseNumEnemies()
     {
+        Debug.Log("Increasing Number of Enemies");
         currentMaxEnemiesInLevel++;
         if (currentMaxEnemiesInLevel == absoluteMaxEnemeies) maxEnemies = true;
     }
@@ -154,6 +157,7 @@ public class Enemy_Manager : MonoBehaviour
     private void ChangeEnemyChances()
     {
         //increase the chance for tougher enemies (excluding the most basic enemy) to spawn
+        Debug.Log("Increase chance for tougher enemies to spawn");
         int enemyToChange = Random.Range(1, enemies.Count);
         Enemy enemy = enemies[enemyToChange];
         enemy.chanceToSpawn += chanceToSpawnIncrease;

@@ -180,12 +180,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ea779d5eab9043429e0dc2d1507ea9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Enemy
-  health: 100
-  damage: 10
-  moveSpeed: 2
-  scoreAward: 10
-  chanceToSpawn: 8
-  enemyManager: {fileID: 0}
+  health: 180
+  damage: 25
+  moveSpeed: 1.7
+  scoreAward: 50
+  deathParticleEffect: {fileID: 2433282508537954060, guid: 3ef3ae421f71c5c4e97fe12dc2fc6312, type: 3}
+  chanceToSpawn: 15
+  isDead: 0
 --- !u!95 &3632044305955865712
 Animator:
   serializedVersion: 7

@@ -6,13 +6,14 @@ public class Enemy : MonoBehaviour
     [SerializeField] private float damage = 20f;
     [SerializeField] private float moveSpeed = 2f;
     [SerializeField] private int scoreAward = 10;
+    [SerializeField] private GameObject deathParticleEffect;
     public int chanceToSpawn = 30;
     Rigidbody2D rb;
     private Transform target;
     private bool isFacingRight = true;
     private Score_Manager scoreManager;
     private Animator anim;
-    private bool isDead;
+    public bool isDead;
     private Enemy_Manager enemyManager;
     private Pickup_Manager pickupManager;
 
@@ -85,7 +86,9 @@ public class Enemy : MonoBehaviour
         enemyManager.EnemyDead();
         anim.SetBool("isDead", true);
         pickupManager.CheckDropPickup(this.transform.position);
-        Destroy(gameObject, 5);
+        GameObject effectInstance = Instantiate(deathParticleEffect, this.transform.position, Quaternion.identity);
+        Destroy(effectInstance, 3f);
+        Destroy(gameObject, 4f);
     }
 
     //damages player if the enemy collides

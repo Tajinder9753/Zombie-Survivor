@@ -20,7 +20,14 @@ public class Pickup_Manager : MonoBehaviour
 
    private void DropPickup(Vector3 locationToDrop)
     {
+        Pickup pickupToDrop = SelectPickup();
         Instantiate(pickups[0], locationToDrop, Quaternion.identity);
+    }
+
+    private Pickup SelectPickup()
+    {
+        int randomSelection = Random.Range(0, pickups.Count);
+        return pickups[randomSelection];
     }
 
     //removes pickup from list, used for permanent pickups once the max permanent increase is hit

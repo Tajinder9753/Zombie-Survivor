@@ -26,11 +26,12 @@ public class Bullet : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         //damage the enemy if collides with it
-        if (collision.tag == "Enemy")
+        if (collision.tag == "Enemy" && !collision.gameObject.GetComponent<Enemy>().isDead)
         {
             collision.gameObject.GetComponent<Enemy>().TakeDamage(damage);
+            Destroy(gameObject);
         }
 
-        Destroy(gameObject);
+       
     }
 }
