@@ -185,6 +185,8 @@ MonoBehaviour:
   moveSpeed: 1.8
   scoreAward: 20
   deathParticleEffect: {fileID: 5985634496115995773, guid: 463cf9f7af4680240898f6aeba3fe3e6, type: 3}
+  deathSound: {fileID: 8300000, guid: 291608b8d286e2a4580ff36324455ce2, type: 3}
+  hitSound: {fileID: 8300000, guid: 6b7eaf4532a2f614595ad58d2b86efc4, type: 3}
   chanceToSpawn: 25
   isDead: 0
 --- !u!95 &8063368614416303525

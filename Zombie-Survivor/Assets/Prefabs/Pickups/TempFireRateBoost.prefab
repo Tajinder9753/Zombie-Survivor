@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5163239662819960472}
   - component: {fileID: 837393263323033385}
   - component: {fileID: 497767542072834322}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: TempFireRateBoost
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -106,8 +106,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Pickup
   pickupType: 5
-  value: -0.5
+  value: -0.11
   timeToKeepActive: 5
+  pickupSound: {fileID: 8300000, guid: 64795b87003c2324fa0814fbc336066c, type: 3}
 --- !u!61 &497767542072834322
 BoxCollider2D:
   m_ObjectHideFlags: 0

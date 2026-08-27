@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8960950992972125544}
   - component: {fileID: 8329545387202943262}
   - component: {fileID: 8775399471494710231}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: TempHealthIncrease
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -108,6 +108,7 @@ MonoBehaviour:
   pickupType: 0
   value: 25
   timeToKeepActive: 0
+  pickupSound: {fileID: 8300000, guid: c48a972d3d024c2408a3331750786a29, type: 3}
 --- !u!61 &8775399471494710231
 BoxCollider2D:
   m_ObjectHideFlags: 0

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2534885469561679251}
   - component: {fileID: 1609031272474201209}
   - component: {fileID: 1906637362222605116}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: CoinPickup
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -108,6 +108,7 @@ MonoBehaviour:
   pickupType: 7
   value: 15
   timeToKeepActive: 0
+  pickupSound: {fileID: 8300000, guid: 78419f98379502c4dbfb2774bc94e7c1, type: 3}
 --- !u!61 &1906637362222605116
 BoxCollider2D:
   m_ObjectHideFlags: 0

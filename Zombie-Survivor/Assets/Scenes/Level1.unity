@@ -415,6 +415,7 @@ MonoBehaviour:
   movementSound: {fileID: 8300000, guid: 9a30499e47789df48aa9bdb1ec7b0982, type: 3}
   firingSound: {fileID: 8300000, guid: d9419ba0bfac1e84a95418ac5851caf6, type: 3}
   deathSoundEffect: {fileID: 8300000, guid: 291608b8d286e2a4580ff36324455ce2, type: 3}
+  hitSound: {fileID: 8300000, guid: 0bddcb411d826e14bb26d40ae45d8e22, type: 3}
 --- !u!212 &120080497
 SpriteRenderer:
   serializedVersion: 2
@@ -2737,6 +2738,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1515993739}
   - component: {fileID: 1515993741}
+  - component: {fileID: 1515993742}
   m_Layer: 0
   m_Name: Sound Manager
   m_TagString: Untagged
@@ -2772,6 +2774,103 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Sound_Manager
   soundObject: {fileID: 1587561462086357321, guid: 5c0868e3397dcf941b0d0ad5004d839e, type: 3}
+--- !u!82 &1515993742
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1515993738}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_Resource: {fileID: 8300000, guid: 4559935c00ef8e94b846e2e03e39f0d0, type: 3}
+  m_PlayOnAwake: 1
+  m_Volume: 0.284
+  m_Pitch: 1
+  Loop: 1
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &1617349073
 GameObject:
   m_ObjectHideFlags: 0
@@ -2925,7 +3024,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dadc24a9455ea16489471347567da87c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Pickup_Manager
-  chanceToDropPickup: 20
+  chanceToDropPickup: 100
   pickups:
   - {fileID: 1609031272474201209, guid: a7ce9c4e5aacc494c81a6ddeb367b0a7, type: 3}
   - {fileID: 6716113948912212389, guid: 3982ca917e7b22c4aaca1f8cce2902f8, type: 3}
@@ -2935,6 +3034,7 @@ MonoBehaviour:
   - {fileID: 837393263323033385, guid: c06c1507f78370445b1da91d797d6470, type: 3}
   - {fileID: 8329545387202943262, guid: 060839893f508a147abee1ef81a7eb03, type: 3}
   - {fileID: 1937415126956462427, guid: f9f6ef99f42de5a468bae47478fcab19, type: 3}
+  timeBeforeDie: 4
 --- !u!1 &1673122911
 GameObject:
   m_ObjectHideFlags: 0

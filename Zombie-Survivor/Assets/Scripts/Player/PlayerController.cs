@@ -36,6 +36,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private AudioClip movementSound;
     [SerializeField] private AudioClip firingSound;
     [SerializeField] private AudioClip deathSoundEffect;
+    [SerializeField] private AudioClip hitSound;
     private bool isMoving;
     AudioSource audioSource;
 
@@ -153,6 +154,7 @@ public class PlayerController : MonoBehaviour
         if (!canTakeDamage) return;
         animator.SetTrigger("isHit");
         health -= damage;
+        soundManager.PlaySoundEffect(hitSound, this.transform, 1f);
         UpdateHealthBar();
         if (health <= 0f)
         {

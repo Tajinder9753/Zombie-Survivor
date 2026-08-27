@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7569480915723459827}
   - component: {fileID: 8292216572177469811}
   - component: {fileID: 6461587837554202661}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: PermanentSpeedBoost
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -108,6 +108,7 @@ MonoBehaviour:
   pickupType: 3
   value: 0.4
   timeToKeepActive: 0
+  pickupSound: {fileID: 8300000, guid: 5e1a9f876d3dafd47bc6b3dde25135fa, type: 3}
 --- !u!61 &6461587837554202661
 BoxCollider2D:
   m_ObjectHideFlags: 0

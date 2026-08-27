@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3772714948838226449}
   - component: {fileID: 8520371495852139573}
   - component: {fileID: 7140251088483165321}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: PermanentFireRateBoost
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -152,5 +152,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Pickup
   pickupType: 6
-  value: -0.3
+  value: -0.1
   timeToKeepActive: 0
+  pickupSound: {fileID: 8300000, guid: 64795b87003c2324fa0814fbc336066c, type: 3}

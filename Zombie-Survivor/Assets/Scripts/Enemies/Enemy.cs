@@ -7,6 +7,8 @@ public class Enemy : MonoBehaviour
     [SerializeField] private float moveSpeed = 2f;
     [SerializeField] private int scoreAward = 10;
     [SerializeField] private GameObject deathParticleEffect;
+    [SerializeField] private AudioClip deathSound;
+    [SerializeField] private AudioClip hitSound;
     public int chanceToSpawn = 30;
     Rigidbody2D rb;
     private Transform target;
@@ -16,7 +18,7 @@ public class Enemy : MonoBehaviour
     public bool isDead;
     private Enemy_Manager enemyManager;
     private Pickup_Manager pickupManager;
-
+    private Sound_Manager soundManager;
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -26,6 +28,7 @@ public class Enemy : MonoBehaviour
         enemyManager = FindAnyObjectByType<Enemy_Manager>();
         enemyManager.AddEnemy();
         pickupManager = FindAnyObjectByType<Pickup_Manager>();
+        soundManager = FindAnyObjectByType<Sound_Manager>();
     }
 
     private void Update()
@@ -66,12 +69,15 @@ public class Enemy : MonoBehaviour
     {
         if (isDead) return;
         health -= damage;
+        soundManager.PlaySoundEffect(hitSound, this.transform, 1f);
         anim.SetTrigger("isHit");
         if (health <= 0f)
         {
+            gameObject.GetComponent<BoxCollider2D>().enabled = false;
             isDead = true;
             rb.linearVelocity = Vector2.zero;
             Die();
+            soundManager.PlaySoundEffect(deathSound, this.transform, 1f);
         }
     }
 

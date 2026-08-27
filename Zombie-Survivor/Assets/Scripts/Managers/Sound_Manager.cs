@@ -13,6 +13,7 @@ public class Sound_Manager : MonoBehaviour
         audioSource.volume = volume;
         audioSource.Play();
         float clipLength = audioSource.clip.length;
+        Destroy(audioSource.gameObject, clipLength);
     }
 
     public void MovementSounds(AudioSource audioSource)

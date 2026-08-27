@@ -5,6 +5,13 @@ public class Pickup : MonoBehaviour
     public PickupType pickupType;
     [SerializeField] private float value;
     [SerializeField] private float timeToKeepActive;
+    [SerializeField] private AudioClip pickupSound;
+    private Sound_Manager soundManager;
+
+    private void Awake()
+    {
+        soundManager = FindAnyObjectByType<Sound_Manager>();
+    }
 
     //calls the appropriate method for the player controller when the player picks up the item
     private void OnCollisionEnter2D(Collision2D collision)
@@ -40,6 +47,7 @@ public class Pickup : MonoBehaviour
                 default:
                     break;
             }
+            soundManager.PlaySoundEffect(pickupSound, this.transform, 1f);
             Destroy(gameObject);
         }
     }

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1026403894795564694}
   - component: {fileID: 4509090176129330940}
   - component: {fileID: 8829249531611216683}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: PermHealthIncrease
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -154,3 +154,4 @@ MonoBehaviour:
   pickupType: 1
   value: 25
   timeToKeepActive: 0
+  pickupSound: {fileID: 8300000, guid: c48a972d3d024c2408a3331750786a29, type: 3}
