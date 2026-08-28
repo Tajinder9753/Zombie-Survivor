@@ -152,15 +152,18 @@ public class PlayerController : MonoBehaviour
     public void TakeDamage(float damage)
     {
         if (!canTakeDamage) return;
-        animator.SetTrigger("isHit");
         health -= damage;
         soundManager.PlaySoundEffect(hitSound, this.transform, 1f);
         UpdateHealthBar();
         if (health <= 0f)
         {
+            canTakeDamage = false;
             soundManager.PlaySoundEffect(deathSoundEffect, this.transform, 1f);
             Die();
-            canTakeDamage = false;
+        }
+        else
+        {
+            animator.SetTrigger("isHit");
         }
     }
 
@@ -274,11 +277,17 @@ public class PlayerController : MonoBehaviour
             //remove the permanent increase pickup if the max increase reached
             if (fireRate <= absoluteMaxFireRate)
             {
+                fireRate = absoluteMaxFireRate;
                 pickupManager.RemovePickup(PickupType.PermanentFiringSpeedBoost);
+                pickupManager.RemovePickup(PickupType.TempFiringSpeedBoost);
             }
             return;
         }
-
+        //makes sure fireRate cannot go lower than absoluteMaxFireRate
+        if (fireRate + fireRateMultiplier <= absoluteMaxFireRate)
+        {
+            fireRateMultiplier = fireRate - absoluteMaxFireRate;
+        }
         fireRate += fireRateMultiplier;
         StartCoroutine(TemporaryFireRateIncrease(fireRateMultiplier, duration));
     }
