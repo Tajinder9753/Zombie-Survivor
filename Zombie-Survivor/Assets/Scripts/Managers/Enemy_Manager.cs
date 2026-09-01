@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class Enemy_Manager : MonoBehaviour
@@ -15,6 +14,11 @@ public class Enemy_Manager : MonoBehaviour
     [SerializeField] private int chanceToSpawnIncrease = 10;
     private bool maxInterval;
     private bool maxEnemies;
+
+    private void Awake()
+    {
+        InitializeEnemies();
+    }
 
     private void Start()
     {
@@ -84,6 +88,14 @@ public class Enemy_Manager : MonoBehaviour
     public void AddEnemy()
     {
         enemyCount++;
+    }
+
+    public void MakeEnemiesMoveFaster()
+    {
+        foreach (Enemy enemy in enemies)
+        {
+            enemy.moveSpeed += 0.1f;
+        }
     }
 
     //increases the difficulty of the game when called in one of 3 ways
@@ -161,5 +173,13 @@ public class Enemy_Manager : MonoBehaviour
         int enemyToChange = Random.Range(1, enemies.Count);
         Enemy enemy = enemies[enemyToChange];
         enemy.chanceToSpawn += chanceToSpawnIncrease;
+    }
+
+    private void InitializeEnemies()
+    {
+        foreach (Enemy enemy in enemies)
+        {
+            enemy.chanceToSpawn = enemy.initialChanceToSpawn;
+        }
     }
 }

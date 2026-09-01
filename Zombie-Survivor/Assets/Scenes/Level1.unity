@@ -1779,11 +1779,11 @@ MonoBehaviour:
   - {fileID: 459535772}
   - {fileID: 967739727}
   currentMaxEnemiesInLevel: 15
-  spawnInterval: 3
+  spawnInterval: 2.2
   enemyCount: 0
   intervalChange: 0.4
-  absoluteMaxEnemeies: 30
-  chanceToSpawnIncrease: 10
+  absoluteMaxEnemeies: 35
+  chanceToSpawnIncrease: 15
 --- !u!1 &947936896
 GameObject:
   m_ObjectHideFlags: 0

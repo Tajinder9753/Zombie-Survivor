@@ -4,11 +4,12 @@ public class Enemy : MonoBehaviour
 {
     [SerializeField] private float health = 100f;
     [SerializeField] private float damage = 20f;
-    [SerializeField] private float moveSpeed = 2f;
+    public float moveSpeed = 2f;
     [SerializeField] private int scoreAward = 10;
     [SerializeField] private GameObject deathParticleEffect;
     [SerializeField] private AudioClip deathSound;
     [SerializeField] private AudioClip hitSound;
+    public int initialChanceToSpawn = 30;
     public int chanceToSpawn = 30;
     Rigidbody2D rb;
     private Transform target;

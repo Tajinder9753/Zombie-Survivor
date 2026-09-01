@@ -187,7 +187,8 @@ MonoBehaviour:
   deathParticleEffect: {fileID: 2433282508537954060, guid: 3ef3ae421f71c5c4e97fe12dc2fc6312, type: 3}
   deathSound: {fileID: 8300000, guid: 291608b8d286e2a4580ff36324455ce2, type: 3}
   hitSound: {fileID: 8300000, guid: 6b7eaf4532a2f614595ad58d2b86efc4, type: 3}
-  chanceToSpawn: 15
+  initialChanceToSpawn: 35
+  chanceToSpawn: 35
   isDead: 0
 --- !u!95 &3632044305955865712
 Animator:

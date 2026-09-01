@@ -28,7 +28,13 @@ public class Score_Manager : MonoBehaviour
         numKills++;
         UpdateScoreText();
 
-        //every 10 kills increase the difficulty slightly through changing something 
+        //every 50 kills make enemies move slightly faster to increase difficulty
+        if (numKills % 50 == 0)
+        {
+            enemyManager.MakeEnemiesMoveFaster();
+        }
+
+        //every x kills increase the difficulty slightly through changing something 
         if (numKills % difficultyIncreaseInterval == 0)
         {
             enemyManager.IncreaseDifficulty();
