@@ -404,7 +404,7 @@ MonoBehaviour:
   moveSpeed: 5
   acceleration: 2
   deceleration: 2
-  fireRate: 0.5
+  fireRate: 0.2
   projectile: {fileID: 7220095380548223740, guid: 0320a9e8a063f2647abb40abdb928f8d, type: 3}
   firingPoint: {fileID: 1650703034}
   absoluteMaxHealth: 200
@@ -1278,7 +1278,7 @@ Transform:
   m_GameObject: {fileID: 459535771}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 25.5, y: -13.45, z: 0}
+  m_LocalPosition: {x: 22.5, y: -11.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1778,11 +1778,11 @@ MonoBehaviour:
   - {fileID: 1505852384}
   - {fileID: 459535772}
   - {fileID: 967739727}
-  currentMaxEnemiesInLevel: 10
-  spawnInterval: 4
+  currentMaxEnemiesInLevel: 15
+  spawnInterval: 3
   enemyCount: 0
   intervalChange: 0.4
-  absoluteMaxEnemeies: 20
+  absoluteMaxEnemeies: 30
   chanceToSpawnIncrease: 10
 --- !u!1 &947936896
 GameObject:
@@ -1947,7 +1947,7 @@ Transform:
   m_GameObject: {fileID: 967739726}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6.6, y: -14.2, z: 0}
+  m_LocalPosition: {x: -6.6, y: -13.12, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2071,7 +2071,7 @@ MonoBehaviour:
   scoreText: {fileID: 1235709077}
   killCountText: {fileID: 167147891}
   enemyManager: {fileID: 833357349}
-  difficultyIncreaseInterval: 1
+  difficultyIncreaseInterval: 5
 --- !u!1 &1127995750
 GameObject:
   m_ObjectHideFlags: 0
@@ -2870,7 +2870,7 @@ Transform:
   m_GameObject: {fileID: 1505852383}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.13, y: 3.94, z: 0}
+  m_LocalPosition: {x: 19.3, y: 2.77, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3236,10 +3236,8 @@ MonoBehaviour:
   pickups:
   - {fileID: 1609031272474201209, guid: a7ce9c4e5aacc494c81a6ddeb367b0a7, type: 3}
   - {fileID: 6716113948912212389, guid: 3982ca917e7b22c4aaca1f8cce2902f8, type: 3}
-  - {fileID: 7140251088483165321, guid: c349a14a797915845b2f29923fc8e348, type: 3}
   - {fileID: 8292216572177469811, guid: f7607cb0c8748fe4ca13f51d010f9431, type: 3}
   - {fileID: 8829249531611216683, guid: 34c72a1d0b0bfba49827d0e6e5f375cb, type: 3}
-  - {fileID: 837393263323033385, guid: c06c1507f78370445b1da91d797d6470, type: 3}
   - {fileID: 8329545387202943262, guid: 060839893f508a147abee1ef81a7eb03, type: 3}
   - {fileID: 1937415126956462427, guid: f9f6ef99f42de5a468bae47478fcab19, type: 3}
   timeBeforeDie: 4
